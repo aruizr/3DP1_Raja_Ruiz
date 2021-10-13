@@ -6,12 +6,12 @@ public class FPSAnimationController : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private CharacterController controller;
 
-    private readonly int idle = Animator.StringToHash("idle");
-    private readonly int jumping = Animator.StringToHash("jump loop");
-    private readonly int walkBackward = Animator.StringToHash("walk backward");
-    private readonly int walkForward = Animator.StringToHash("walk forward");
-    private readonly int walkLeft = Animator.StringToHash("walk left");
-    private readonly int walkRight = Animator.StringToHash("walk right");
+    private readonly int _idleAnimation = Animator.StringToHash("idle");
+    private readonly int _jumpingAnimation = Animator.StringToHash("jump loop");
+    private readonly int _walkBackwardAnimation = Animator.StringToHash("walk backward");
+    private readonly int _walkForwardAnimation = Animator.StringToHash("walk forward");
+    private readonly int _walkLeftAnimation = Animator.StringToHash("walk left");
+    private readonly int _walkRightAnimation = Animator.StringToHash("walk right");
 
     private float _crossFadeTime = 0.25f;
     private Vector2 _direction;
@@ -21,12 +21,12 @@ public class FPSAnimationController : MonoBehaviour
     {
         _stateMachine = new StateMachine<State>();
 
-        _stateMachine.OnStatePhase(State.Idle, StatePhase.Enter, () => PlayAnimation(idle));
-        _stateMachine.OnStatePhase(State.WalkForward, StatePhase.Enter, () => PlayAnimation(walkForward));
-        _stateMachine.OnStatePhase(State.WalkRight, StatePhase.Enter, () => PlayAnimation(walkRight));
-        _stateMachine.OnStatePhase(State.WalkLeft, StatePhase.Enter, () => PlayAnimation(walkLeft));
-        _stateMachine.OnStatePhase(State.WalkBackward, StatePhase.Enter, () => PlayAnimation(walkBackward));
-        _stateMachine.OnStatePhase(State.Jumping, StatePhase.Enter, () => PlayAnimation(jumping));
+        _stateMachine.OnStatePhase(State.Idle, StatePhase.Enter, () => PlayAnimation(_idleAnimation));
+        _stateMachine.OnStatePhase(State.WalkForward, StatePhase.Enter, () => PlayAnimation(_walkForwardAnimation));
+        _stateMachine.OnStatePhase(State.WalkRight, StatePhase.Enter, () => PlayAnimation(_walkRightAnimation));
+        _stateMachine.OnStatePhase(State.WalkLeft, StatePhase.Enter, () => PlayAnimation(_walkLeftAnimation));
+        _stateMachine.OnStatePhase(State.WalkBackward, StatePhase.Enter, () => PlayAnimation(_walkBackwardAnimation));
+        _stateMachine.OnStatePhase(State.Jumping, StatePhase.Enter, () => PlayAnimation(_jumpingAnimation));
 
         _stateMachine.CurrentState = State.Idle;
     }
