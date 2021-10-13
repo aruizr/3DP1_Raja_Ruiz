@@ -850,6 +850,10 @@ PrefabInstance:
       propertyPath: fireRate
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 1093796264225578860, guid: 0ebaf7de73e132c4aa2061751a4d2b15, type: 3}
+      propertyPath: bulletDecal
+      value: 
+      objectReference: {fileID: 5702986039725407477, guid: 7a7b2814c45713b4a90f2cd7c3931ded, type: 3}
     - target: {fileID: 1093796264225578866, guid: 0ebaf7de73e132c4aa2061751a4d2b15, type: 3}
       propertyPath: m_RootOrder
       value: 2
