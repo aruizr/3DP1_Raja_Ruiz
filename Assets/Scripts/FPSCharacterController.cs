@@ -21,7 +21,7 @@ public class FPSCharacterController : MonoBehaviour
         _jumpSpeed = 2 * jumpHeight / jumpApexTime;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         ProcessVerticalVelocity();
         ProcessHorizontalVelocity();
@@ -31,7 +31,7 @@ public class FPSCharacterController : MonoBehaviour
         var z = _horizontalVelocity.y * t.forward;
         var y = _verticalVelocity * Vector3.up;
 
-        controller.Move((x + y + z) * Time.fixedDeltaTime);
+        controller.Move((x + y + z) * Time.deltaTime);
     }
 
     private void ProcessHorizontalVelocity()
@@ -49,7 +49,7 @@ public class FPSCharacterController : MonoBehaviour
                 _verticalVelocity = _jumpSpeed;
                 break;
             case false:
-                _verticalVelocity -= _gravity * Time.fixedDeltaTime;
+                _verticalVelocity -= _gravity * Time.deltaTime;
                 break;
         }
     }
