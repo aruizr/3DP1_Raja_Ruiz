@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7e9b8f0e7724c840ad61fef66ee2357, type: 3}
+  m_Name: Event Data
+  m_EditorClassIdentifier: 
+  onShootEventName: Shoot
+  onFailedToShootEventName: Failed To Shoot
+  onShootHitEventName: Shoot Hit
+  onAddAmmoEventName: Add Ammo
+  onReloadEventName: Reload
+  onReloadStartEventName: Reload Start
+  onReloadFinishEventName: Reload Finish
+  onPlayerDieEventName: Player Die
+  onDisplayAmmoInfoEventName: Display Ammo
+  onDisplayHealthInfoEventName: Display Health
+  onDisplayInteractionInfo: Display Interaction Info
+  onRestorePlayerHealth: Restore Health
+  onRestorePlayerShield: Restore Shield
