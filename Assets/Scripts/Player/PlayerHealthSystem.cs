@@ -1,100 +1,95 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHealthSystem : MonoBehaviour, IDamageTaker
+public class PlayerHealthSystem : HealthSystem
 {
-    [SerializeField] private float shield;
-    [SerializeField] private float health;
+    [SerializeField] protected float shield;
 
-    [SerializeField] [ReadOnly] private float _currentHealth;
-    [SerializeField] [ReadOnly] private float _currentShield;
+    private float _currentShield;
 
-    public float CurrentHealth
-    {
-        get => _currentHealth;
-        private set
-        {
-            _currentHealth = value;
-
-            DisplayHealthInfo();
-
-            if (_currentHealth > 0) return;
-
-            _currentHealth = 0;
-            Die();
-        }
-    }
-
-    public float CurrentShield
+    private float CurrentShield
     {
         get => _currentShield;
-        private set
+        set
         {
             _currentShield = value;
-
-            DisplayHealthInfo();
+            OnUpdateShield();
         }
-    }
-
-    private void Awake()
-    {
-        CurrentHealth = health;
-        CurrentShield = shield;
-    }
-
-    private void Start()
-    {
-        DisplayHealthInfo();
     }
 
     private void OnEnable()
     {
-        EventManager.StartListening(EventData.instance.onRestorePlayerHealth, RestoreHealth);
-        EventManager.StartListening(EventData.instance.onRestorePlayerShield, RestoreShield);
+        EventManager.StartListening(EventData.instance.onRestorePlayerHealth, OnRestoreHealth);
+        EventManager.StartListening(EventData.instance.onRestorePlayerShield, OnRestoreShield);
     }
 
     private void OnDisable()
     {
-        EventManager.StopListening(EventData.instance.onRestorePlayerHealth, RestoreHealth);
-        EventManager.StopListening(EventData.instance.onRestorePlayerShield, RestoreShield);
+        EventManager.StopListening(EventData.instance.onRestorePlayerHealth, OnRestoreHealth);
+        EventManager.StopListening(EventData.instance.onRestorePlayerShield, OnRestoreShield);
     }
 
-    public void TakeDamage(float amount)
+    protected override void OnInit()
     {
-        if (CurrentShield <= 0)
+        OnRestoreShield(null);
+    }
+
+    public override void TakeDamage(float amount)
+    {
+        var currentShield = CurrentShield;
+        var currentHealth = CurrentHealth;
+
+        currentShield -= amount * 0.75f;
+        currentHealth -= amount * 0.25f;
+
+        if (currentShield < 0)
         {
-            CurrentHealth -= amount;
-            return;
+            currentHealth -= -currentShield;
+            currentShield = 0;
         }
 
-        CurrentShield -= amount * 0.75f;
-        CurrentHealth -= amount * 0.25f;
+        CurrentHealth = currentHealth;
+        CurrentShield = currentShield;
 
-        if (CurrentShield >= 0) return;
-
-        CurrentHealth -= -CurrentShield;
-        CurrentShield = 0;
+        if (CurrentHealth > 0) OnTakeDamage();
+        else OnDie();
     }
 
-    private void DisplayHealthInfo()
+    protected override void OnUpdateHealth()
     {
-        EventManager.TriggerEvent(
-            EventData.instance.onDisplayHealthInfoEventName,
-            CurrentHealth / health,
-            CurrentShield / shield);
+        var healthPercent = CurrentHealth / health;
+        EventManager.TriggerEvent(EventData.instance.onUpdatePlayerHealth, new Dictionary<string, object>
+        {
+            {"health", healthPercent}
+        });
     }
 
-    private void Die()
+    private void OnUpdateShield()
     {
-        EventManager.TriggerEvent(EventData.instance.onPlayerDieEventName);
+        var shieldPercent = CurrentShield / shield;
+        EventManager.TriggerEvent(EventData.instance.onUpdatePlayerShield, new Dictionary<string, object>
+        {
+            {"shield", shieldPercent}
+        });
     }
 
-    private void RestoreHealth(params object[] args)
+    private void OnRestoreHealth(Dictionary<string, object> message)
     {
         CurrentHealth = health;
     }
 
-    private void RestoreShield(params object[] args)
+    private void OnRestoreShield(Dictionary<string, object> message)
     {
         CurrentShield = shield;
+    }
+
+    protected override void OnTakeDamage()
+    {
+        EventManager.TriggerEvent(EventData.instance.onPlayerTakeDamage, null);
+    }
+
+    protected override void OnDie()
+    {
+        EventManager.TriggerEvent(EventData.instance.onPlayerDie, null);
     }
 }

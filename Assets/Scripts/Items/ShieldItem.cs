@@ -1,20 +1,8 @@
-using UnityEngine;
-
-public class ShieldItem : MonoBehaviour, IInteractiveItem
+public class ShieldItem : Item
 {
-    public string GetName()
+    public override void Interact()
     {
-        return "Shield Kit";
-    }
-
-    public string GetDescription()
-    {
-        return "";
-    }
-
-    public void Interact()
-    {
-        EventManager.TriggerEvent(EventData.instance.onRestorePlayerShield);
+        EventManager.TriggerEvent(EventData.instance.onRestorePlayerShield, null);
         Destroy(gameObject);
     }
 }

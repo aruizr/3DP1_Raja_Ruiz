@@ -1,25 +1,15 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class AmmoItem : MonoBehaviour, IInteractiveItem
+public class AmmoItem : Item
 {
-    [SerializeField] private AmmoCartridge _ammoCartridge;
-
-    public string GetName()
+    public override void Interact()
     {
-        return "Ammo";
-    }
-
-    public string GetDescription()
-    {
-        return _ammoCartridge.Rounds + " rounds";
-    }
-
-    public void Interact()
-    {
-        EventManager.TriggerEvent(EventData.instance.onAddAmmoEventName, _ammoCartridge);
+        var ammoItemData = (AmmoItemData) itemData;
+        var ammoClip = new AmmoClip(ammoItemData.ammoClip.Rounds);
+        EventManager.TriggerEvent(EventData.instance.onGivePlayerAmmo, new Dictionary<string, object>
+        {
+            {"ammoClip", ammoClip}
+        });
         Destroy(gameObject);
     }
 }

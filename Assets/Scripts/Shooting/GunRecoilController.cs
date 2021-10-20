@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
@@ -20,12 +21,12 @@ public class GunRecoilController : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.StartListening(EventData.instance.onShootEventName, OnShootEvent);
+        EventManager.StartListening(EventData.instance.onShoot, OnShoot);
     }
 
     private void OnDisable()
     {
-        EventManager.StopListening(EventData.instance.onShootEventName, OnShootEvent);
+        EventManager.StopListening(EventData.instance.onShoot, OnShoot);
     }
 
     private void InitGunRecoilSequence()
@@ -55,7 +56,7 @@ public class GunRecoilController : MonoBehaviour
         _gunRecoilSequence.Pause();
     }
 
-    private void OnShootEvent(object[] args)
+    private void OnShoot(Dictionary<string, object> message)
     {
         _gunRecoilSequence.Restart();
     }

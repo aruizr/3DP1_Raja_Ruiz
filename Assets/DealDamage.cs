@@ -7,6 +7,6 @@ public class DealDamage : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!other.gameObject.CompareTag("Player")) return;
-        other.gameObject.GetComponent<IDamageTaker>().TakeDamage(damage);
+        other.gameObject.GetComponent<IDamageTaker>()?.TakeDamage(damage);
     }
 }

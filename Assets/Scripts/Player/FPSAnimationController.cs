@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -48,15 +49,15 @@ public class FPSAnimationController : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.StartListening(EventData.instance.onReloadFinishEventName, OnReloadFinishEvent);
+        EventManager.StartListening(EventData.instance.onReloadFinish, OnReloadFinish);
     }
 
     private void OnDisable()
     {
-        EventManager.StopListening(EventData.instance.onReloadFinishEventName, OnReloadFinishEvent);
+        EventManager.StopListening(EventData.instance.onReloadFinish, OnReloadFinish);
     }
 
-    private void OnReloadFinishEvent(object[] args)
+    private void OnReloadFinish(Dictionary<string, object> message)
     {
         _stateMachine.Unlock();
     }

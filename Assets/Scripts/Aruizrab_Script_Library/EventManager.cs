@@ -1,61 +1,37 @@
+using System;
 using System.Collections.Generic;
 
 public class EventManager : SingletonMonoBehaviour<EventManager>
 {
-    public delegate void CustomEvent(params object[] args);
-
-    private Dictionary<string, CustomEventWrapper> _events;
+    private Dictionary<string, Action<Dictionary<string, object>>> _events;
 
     private void OnEnable()
     {
-        _events ??= new Dictionary<string, CustomEventWrapper>();
+        _events ??= new Dictionary<string, Action<Dictionary<string, object>>>();
     }
 
-    public static void StartListening(string eventName, CustomEvent listener)
+    public static void StartListening(string eventName, Action<Dictionary<string, object>> listener)
     {
-        if (Instance._events.TryGetValue(eventName, out var customEvent))
+        if (Instance._events.TryGetValue(eventName, out var @event))
         {
-            customEvent.AddListener(listener);
+            @event += listener;
+            Instance._events[eventName] = @event;
             return;
         }
 
-        Instance._events.Add(eventName, new CustomEventWrapper(listener));
+        Instance._events.Add(eventName, listener);
     }
 
-    public static void StopListening(string eventName, CustomEvent listener)
+    public static void StopListening(string eventName, Action<Dictionary<string, object>> listener)
     {
-        if (!Instance._events.TryGetValue(eventName, out var customEvent)) return;
-        customEvent.RemoveListener(listener);
+        if (!Instance._events.TryGetValue(eventName, out var @event)) return;
+        @event -= listener;
+        Instance._events[eventName] = @event;
     }
 
-    public static void TriggerEvent(string eventName, params object[] args)
+    public static void TriggerEvent(string eventName, Dictionary<string, object> message)
     {
-        if (!Instance._events.TryGetValue(eventName, out var customEvent)) return;
-        customEvent.Invoke(args);
-    }
-
-    private class CustomEventWrapper
-    {
-        private CustomEvent _customEvent;
-
-        public CustomEventWrapper(CustomEvent customEvent)
-        {
-            _customEvent = customEvent;
-        }
-
-        public void AddListener(CustomEvent customEvent)
-        {
-            _customEvent += customEvent;
-        }
-
-        public void RemoveListener(CustomEvent customEvent)
-        {
-            _customEvent -= customEvent;
-        }
-
-        public void Invoke(params object[] args)
-        {
-            _customEvent?.Invoke(args);
-        }
+        if (!Instance._events.TryGetValue(eventName, out var @event)) return;
+        @event?.Invoke(message);
     }
 }

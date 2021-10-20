@@ -1,20 +1,8 @@
-using UnityEngine;
-
-public class HealthItem : MonoBehaviour, IInteractiveItem
+public class HealthItem : Item
 {
-    public string GetName()
+    public override void Interact()
     {
-        return "Health Kit";
-    }
-
-    public string GetDescription()
-    {
-        return "";
-    }
-
-    public void Interact()
-    {
-        EventManager.TriggerEvent(EventData.instance.onRestorePlayerHealth);
+        EventManager.TriggerEvent(EventData.instance.onRestorePlayerHealth, null);
         Destroy(gameObject);
     }
 }

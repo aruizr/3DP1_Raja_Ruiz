@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BulletImpactFXController : MonoBehaviour
@@ -28,17 +29,17 @@ public class BulletImpactFXController : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.StartListening(EventData.instance.onShootHitEventName, OnShootHitEvent);
+        EventManager.StartListening(EventData.instance.onShootHit, OnShootHit);
     }
 
     private void OnDisable()
     {
-        EventManager.StopListening(EventData.instance.onShootHitEventName, OnShootHitEvent);
+        EventManager.StopListening(EventData.instance.onShootHit, OnShootHit);
     }
 
-    private void OnShootHitEvent(object[] args)
+    private void OnShootHit(Dictionary<string, object> message)
     {
-        var hit = (RaycastHit) args[0];
+        var hit = (RaycastHit) message["hit"];
         var impactFX = _impactFXPool.Get();
         impactFX.transform.position = hit.point;
         impactFX.transform.rotation = Quaternion.LookRotation(hit.normal);

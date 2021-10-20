@@ -16,9 +16,9 @@ public abstract class SingletonMonoBehaviour<T> : ExtendedMonoBehaviour where T 
         }
     }
 
-    private void OnApplicationQuit()
+    private void OnDestroy()
     {
-        Destroy(gameObject);
+        _instance = null;
     }
 
     private static T CreateInstance()
