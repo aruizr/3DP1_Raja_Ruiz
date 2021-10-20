@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExplodableMonitor : MonoBehaviour
+public class ExplodableMonitor : HealthSystem
 {
     [SerializeField]
     private GameObject screenExplosionParticleSystem;
@@ -20,8 +20,8 @@ public class ExplodableMonitor : MonoBehaviour
         
     }
 
-    void OnCollisionEnter(Collision col){
-        if ((col.gameObject.tag == "bullet") && (!broken))
+    protected override void OnDie(){
+        if ((!broken))
         {
             broken = true;
             screenOff.SetActive(false);
@@ -37,6 +37,12 @@ public class ExplodableMonitor : MonoBehaviour
                 shardRB.transform.Rotate(randomRotationX,randomRotationY,randomRotationZ);
                 shardRB.AddRelativeForce(Vector3.forward * randomForce,ForceMode.Impulse);
             }
+
+            EventManager.TriggerEvent("monitor_destroyed", new Dictionary<string, object>(){
+                {
+                "monitor" , gameObject
+                },
+            });
         }
 
     }
