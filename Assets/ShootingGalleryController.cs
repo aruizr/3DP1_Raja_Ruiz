@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ShootingGalleryController : MonoBehaviour
 {
 
     [SerializeField]
     List<GameObject> targets;
+
+    [SerializeField]
+    TextMeshProUGUI scoreUI;
 
     private float score;
 
@@ -24,7 +28,8 @@ public class ShootingGalleryController : MonoBehaviour
     void MonitorDestroyer(Dictionary<string,object> args){
         Debug.Log(args["monitor"]);
         score += 10;
-         Debug.Log("SCORE -> "+score);
+        
+        scoreUI.SetText("Score: " + score);
     }
 
     void MonitorSubscribed(Dictionary<string,object> args){
@@ -51,6 +56,9 @@ public class ShootingGalleryController : MonoBehaviour
 
     IEnumerator StartShootingChallange() 
     {
+
+        score = 0f;
+
         yield return new WaitForSeconds(3f);
         ShuffleTargetOrder();
         ResetAllTargets();
@@ -66,6 +74,18 @@ public class ShootingGalleryController : MonoBehaviour
 
         yield return new WaitForSeconds(3f);
         ResetAllTargets();
+    }
+
+    void OnTriggerEnter(Collider other){
+        if(other.gameObject.tag == "Player"){
+            Debug.Log("PLAYER CAME IN");
+        }
+    }
+
+    void OnTriggerExit(Collider other){
+        if(other.gameObject.tag == "Player"){
+            Debug.Log("PLAYER LEAVING");
+        }
     }
 
     void ResetAllTargets(){
