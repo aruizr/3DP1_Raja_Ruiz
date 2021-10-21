@@ -12,12 +12,20 @@ public class ExplodableMonitor : HealthSystem
     private GameObject screenOn;
     [SerializeField]
     private GameObject shards;
-    private bool broken;
+    public bool broken;
+    private Transform initialPosition;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
+        initialPosition = gameObject.transform;
+
+        EventManager.TriggerEvent("subscribe_monitor", new Dictionary<string, object>(){
+                {
+                "monitor" , gameObject
+                },
+            });
     }
 
     protected override void OnDie(){
@@ -43,6 +51,20 @@ public class ExplodableMonitor : HealthSystem
                 "monitor" , gameObject
                 },
             });
+        }
+
+    }
+
+    public void resetMonitor(){
+        
+        if ((broken))
+        {
+            broken = false;
+            screenOn.SetActive(true);
+            shards.SetActive(false);
+            
+            screenExplosionParticleSystem.SetActive(false);
+            
         }
 
     }
