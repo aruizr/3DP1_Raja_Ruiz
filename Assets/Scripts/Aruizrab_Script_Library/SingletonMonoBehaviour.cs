@@ -10,20 +10,11 @@ public abstract class SingletonMonoBehaviour<T> : ExtendedMonoBehaviour where T 
         {
             if (_instance) return _instance;
 
-            _instance = FindObjectOfType<T>() ?? CreateInstance();
+            _instance = FindObjectOfType<T>();
+
+            if (!_instance) Debug.LogError("Singleton<" + typeof(T) + "> instance not found.");
 
             return _instance;
         }
-    }
-
-    private void OnDestroy()
-    {
-        _instance = null;
-    }
-
-    private static T CreateInstance()
-    {
-        var container = new GameObject(typeof(T).Name);
-        return container.AddComponent<T>();
     }
 }
