@@ -12,17 +12,17 @@ public class DistanceDoor : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    void OnTriggerEnter(Collider other){
-        if(other.gameObject.tag == "Player"){
-            animator.Play("Base Layer.DoorAnimation");
-            Debug.Log("EXECUTING");
-        }
-    }
+    // void OnTriggerEnter(Collider other){
+    //     if(other.gameObject.tag == "Player"){
+    //         animator.Play("DoorAnimation");
+    //         Debug.Log("EXECUTING");
+    //     }
+    // }
 
-    void OnTriggerExit(Collision collision){
-        if(collision.gameObject.tag == "Player"){
-            animator.Play("Base Layer.DoorAnimation_close");
-        }
-    }
+    // void OnTriggerExit(Collision collision){
+    //     if(collision.gameObject.tag == "Player"){
+    //         animator.Play("DoorAnimation_close");
+    //     }
+    // }
 
 }
