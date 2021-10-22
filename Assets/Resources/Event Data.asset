@@ -28,3 +28,4 @@ MonoBehaviour:
   onPlayerDie: 14
   onPlayerTakeDamage: 15
   onItemDestroyed: 16
+  onChallengeStartedByPlayer: 17

@@ -26,4 +26,6 @@ public class EventData : ScriptableSingleton<EventData>
     public string onPlayerTakeDamage;
     
     public string onItemDestroyed;
+
+    public string onChallengeStartedByPlayer;
 }

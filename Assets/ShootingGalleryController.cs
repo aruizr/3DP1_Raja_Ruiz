@@ -12,17 +12,27 @@ public class ShootingGalleryController : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI scoreUI;
 
+    [SerializeField]
+    GameObject scoreGUI;
+
     private float score;
+    private bool running;
 
     void OnEnable(){
         
         EventManager.StartListening("monitor_destroyed", MonitorDestroyer);
         EventManager.StartListening("subscribe_monitor", MonitorSubscribed);
+        EventManager.StartListening(EventData.instance.onChallengeStartedByPlayer, StartShootingChallangeListener);
     }
 
     void OnDisable(){
         EventManager.StopListening("monitor_destroyed", MonitorDestroyer);
         EventManager.StopListening("subscribe_monitor", MonitorSubscribed);
+        EventManager.StopListening(EventData.instance.onChallengeStartedByPlayer, StartShootingChallangeListener);
+    }
+
+    void Start(){
+        ResetAllTargets();
     }
 
     void MonitorDestroyer(Dictionary<string,object> args){
@@ -40,23 +50,15 @@ public class ShootingGalleryController : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        score = 0f;
+    void StartShootingChallangeListener(Dictionary<string,object> args){
         StartCoroutine("StartShootingChallange");
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     IEnumerator StartShootingChallange() 
     {
 
+        if (!running){
+        running = true;
         score = 0f;
 
         yield return new WaitForSeconds(3f);
@@ -74,17 +76,22 @@ public class ShootingGalleryController : MonoBehaviour
 
         yield return new WaitForSeconds(3f);
         ResetAllTargets();
+
+        running = false;
+        }
     }
 
     void OnTriggerEnter(Collider other){
         if(other.gameObject.tag == "Player"){
             Debug.Log("PLAYER CAME IN");
+            scoreGUI.SetActive(true);
         }
     }
 
     void OnTriggerExit(Collider other){
         if(other.gameObject.tag == "Player"){
             Debug.Log("PLAYER LEAVING");
+            scoreGUI.SetActive(false);
         }
     }
 
