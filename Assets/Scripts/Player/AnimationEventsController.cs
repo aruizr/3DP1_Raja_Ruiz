@@ -4,11 +4,11 @@ public class AnimationEventsController : MonoBehaviour
 {
     public void OnFinishReload()
     {
-        EventManager.TriggerEvent(EventData.instance.onReloadFinish, null);
+        EventManager.TriggerEvent(EventData.Instance.onReloadFinish, null);
     }
 
     public void OnStartReload()
     {
-        EventManager.TriggerEvent(EventData.instance.onReloadStart, null);
+        EventManager.TriggerEvent(EventData.Instance.onReloadStart, null);
     }
 }

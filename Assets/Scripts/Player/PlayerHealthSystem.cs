@@ -19,14 +19,14 @@ public class PlayerHealthSystem : HealthSystem
 
     private void OnEnable()
     {
-        EventManager.StartListening(EventData.instance.onRestorePlayerHealth, OnRestoreHealth);
-        EventManager.StartListening(EventData.instance.onRestorePlayerShield, OnRestoreShield);
+        EventManager.StartListening(EventData.Instance.onRestorePlayerHealth, OnRestoreHealth);
+        EventManager.StartListening(EventData.Instance.onRestorePlayerShield, OnRestoreShield);
     }
 
     private void OnDisable()
     {
-        EventManager.StopListening(EventData.instance.onRestorePlayerHealth, OnRestoreHealth);
-        EventManager.StopListening(EventData.instance.onRestorePlayerShield, OnRestoreShield);
+        EventManager.StopListening(EventData.Instance.onRestorePlayerHealth, OnRestoreHealth);
+        EventManager.StopListening(EventData.Instance.onRestorePlayerShield, OnRestoreShield);
     }
 
     protected override void OnInit()
@@ -58,7 +58,7 @@ public class PlayerHealthSystem : HealthSystem
     protected override void OnUpdateHealth()
     {
         var healthPercent = CurrentHealth / MaxHealth;
-        EventManager.TriggerEvent(EventData.instance.onUpdatePlayerHealth, new Dictionary<string, object>
+        EventManager.TriggerEvent(EventData.Instance.onUpdatePlayerHealth, new Dictionary<string, object>
         {
             {"health", healthPercent}
         });
@@ -67,7 +67,7 @@ public class PlayerHealthSystem : HealthSystem
     private void OnUpdateShield()
     {
         var shieldPercent = CurrentShield / shield;
-        EventManager.TriggerEvent(EventData.instance.onUpdatePlayerShield, new Dictionary<string, object>
+        EventManager.TriggerEvent(EventData.Instance.onUpdatePlayerShield, new Dictionary<string, object>
         {
             {"shield", shieldPercent}
         });
@@ -85,11 +85,11 @@ public class PlayerHealthSystem : HealthSystem
 
     protected override void OnTakeDamage()
     {
-        EventManager.TriggerEvent(EventData.instance.onPlayerTakeDamage, null);
+        EventManager.TriggerEvent(EventData.Instance.onPlayerTakeDamage, null);
     }
 
     protected override void OnDie()
     {
-        EventManager.TriggerEvent(EventData.instance.onPlayerDie, null);
+        EventManager.TriggerEvent(EventData.Instance.onPlayerDie, null);
     }
 }

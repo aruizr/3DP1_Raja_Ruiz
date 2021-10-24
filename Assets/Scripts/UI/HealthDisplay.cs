@@ -12,12 +12,12 @@ public class HealthDisplay : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.StartListening(EventData.instance.onUpdatePlayerHealth, OnDisplayHealth);
+        EventManager.StartListening(EventData.Instance.onUpdatePlayerHealth, OnDisplayHealth);
     }
 
     private void OnDisable()
     {
-        EventManager.StopListening(EventData.instance.onUpdatePlayerHealth, OnDisplayHealth);
+        EventManager.StopListening(EventData.Instance.onUpdatePlayerHealth, OnDisplayHealth);
     }
 
     private void OnDisplayHealth(Dictionary<string, object> message)

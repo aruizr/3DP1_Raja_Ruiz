@@ -10,12 +10,12 @@ public class ShieldDisplay : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.StartListening(EventData.instance.onUpdatePlayerShield, OnDisplayHealth);
+        EventManager.StartListening(EventData.Instance.onUpdatePlayerShield, OnDisplayHealth);
     }
 
     private void OnDisable()
     {
-        EventManager.StopListening(EventData.instance.onUpdatePlayerShield, OnDisplayHealth);
+        EventManager.StopListening(EventData.Instance.onUpdatePlayerShield, OnDisplayHealth);
     }
 
     private void OnDisplayHealth(Dictionary<string, object> message)

@@ -49,12 +49,12 @@ public class FPSAnimationController : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.StartListening(EventData.instance.onReloadFinish, OnReloadFinish);
+        EventManager.StartListening(EventData.Instance.onReloadFinish, OnReloadFinish);
     }
 
     private void OnDisable()
     {
-        EventManager.StopListening(EventData.instance.onReloadFinish, OnReloadFinish);
+        EventManager.StopListening(EventData.Instance.onReloadFinish, OnReloadFinish);
     }
 
     private void OnReloadFinish(Dictionary<string, object> message)

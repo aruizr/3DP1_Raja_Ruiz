@@ -1,9 +1,8 @@
 using UnityEditor;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Event Data", menuName = "Scriptable Objects/Event Data")]
-[FilePath("Resources/Event Data", FilePathAttribute.Location.ProjectFolder)]
-public class EventData : ScriptableSingleton<EventData>
+[CreateAssetMenu(fileName = "EventData", menuName = "Scriptable Objects/Event Data")]
+public class EventData : SingletonScriptableObject<EventData>
 {
     public string onShoot;
     public string onFailedToShoot;

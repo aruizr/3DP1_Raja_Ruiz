@@ -32,12 +32,12 @@ public class FPSCameraController : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.StartListening(EventData.instance.onShoot, OnShootEvent);
+        EventManager.StartListening(EventData.Instance.onShoot, OnShootEvent);
     }
 
     private void OnDisable()
     {
-        EventManager.StopListening(EventData.instance.onShoot, OnShootEvent);
+        EventManager.StopListening(EventData.Instance.onShoot, OnShootEvent);
     }
 
     private void OnShootEvent(Dictionary<string, object> obj)

@@ -22,13 +22,13 @@ public class ShootingGalleryController : MonoBehaviour
         
         EventManager.StartListening("monitor_destroyed", MonitorDestroyer);
         EventManager.StartListening("subscribe_monitor", MonitorSubscribed);
-        EventManager.StartListening(EventData.instance.onChallengeStartedByPlayer, StartShootingChallangeListener);
+        EventManager.StartListening(EventData.Instance.onChallengeStartedByPlayer, StartShootingChallangeListener);
     }
 
     void OnDisable(){
         EventManager.StopListening("monitor_destroyed", MonitorDestroyer);
         EventManager.StopListening("subscribe_monitor", MonitorSubscribed);
-        EventManager.StopListening(EventData.instance.onChallengeStartedByPlayer, StartShootingChallangeListener);
+        EventManager.StopListening(EventData.Instance.onChallengeStartedByPlayer, StartShootingChallangeListener);
     }
 
     void Start(){

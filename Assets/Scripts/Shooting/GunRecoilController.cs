@@ -21,12 +21,12 @@ public class GunRecoilController : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.StartListening(EventData.instance.onShoot, OnShoot);
+        EventManager.StartListening(EventData.Instance.onShoot, OnShoot);
     }
 
     private void OnDisable()
     {
-        EventManager.StopListening(EventData.instance.onShoot, OnShoot);
+        EventManager.StopListening(EventData.Instance.onShoot, OnShoot);
     }
 
     private void InitGunRecoilSequence()

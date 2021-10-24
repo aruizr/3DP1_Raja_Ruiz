@@ -24,12 +24,12 @@ public class DecalController : ExtendedMonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.StartListening(EventData.instance.onShootHit, OnShootHit);
+        EventManager.StartListening(EventData.Instance.onShootHit, OnShootHit);
     }
 
     private void OnDisable()
     {
-        EventManager.StopListening(EventData.instance.onShootHit, OnShootHit);
+        EventManager.StopListening(EventData.Instance.onShootHit, OnShootHit);
     }
 
     private void OnShootHit(Dictionary<string, object> message)

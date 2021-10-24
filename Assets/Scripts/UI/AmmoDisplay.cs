@@ -9,12 +9,12 @@ public class AmmoDisplay : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.StartListening(EventData.instance.onUpdateAmmo, OnDisplayAmmo);
+        EventManager.StartListening(EventData.Instance.onUpdateAmmo, OnDisplayAmmo);
     }
 
     private void OnDisable()
     {
-        EventManager.StopListening(EventData.instance.onUpdateAmmo, OnDisplayAmmo);
+        EventManager.StopListening(EventData.Instance.onUpdateAmmo, OnDisplayAmmo);
     }
 
     private void OnDisplayAmmo(Dictionary<string, object> message)
