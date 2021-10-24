@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EventDoor : MonoBehaviour
+public class EventDoor : Door
 {
     // Start is called before the first frame update
     void Start()
