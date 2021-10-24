@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Key : Item
 {
+    [SerializeField]
     string keyID;
 
     //OnTriggerEnter executar event de recollida de clau.

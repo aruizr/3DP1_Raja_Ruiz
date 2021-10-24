@@ -6,6 +6,9 @@ public class KeyStore : MonoBehaviour
 {
     List<string> keys;
 
+    void Awake(){
+        keys = new List<string>();
+    }
     void OnEnable(){
         
         EventManager.StartListening("key_collected", KeyCollectedEventListener);
@@ -18,8 +21,10 @@ public class KeyStore : MonoBehaviour
     }
 
     void KeyCollectedEventListener(Dictionary<string,object> args){
+        Debug.Log("DETECTEDDDDDDDD");
+        Debug.Log(args);
         if(args["key"] != null){
-            Debug.Log(args["key"] + " COLLECTED!");
+            Debug.Log((string)args["key"] + " COLLECTED!");
             keys.Add((string)args["key"]);
         }
     }

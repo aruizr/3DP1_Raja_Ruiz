@@ -21,9 +21,9 @@ public class FPSCameraController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        _targetRotation += (_input + _offset) * (sensitivity * Time.deltaTime);
+        _targetRotation += (_input + _offset) * (sensitivity * Time.fixedDeltaTime);
         _targetRotation.y = Mathf.Clamp(_targetRotation.y, pitchRange.min, pitchRange.max);
         _currentRotation = Vector2.Lerp(_currentRotation, _targetRotation, smoothing);
         transform.localEulerAngles = Vector3.up * _currentRotation.x;
