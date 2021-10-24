@@ -13,7 +13,7 @@ public class DecalController : ExtendedMonoBehaviour
         _decalPool = new QueuePool<GameObject>(
             () =>
             {
-                var decal = Instantiate(bulletDecalPrefab, transform);
+                var decal = Instantiate(bulletDecalPrefab);
                 decal.SetActive(false);
                 return decal;
             },

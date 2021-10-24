@@ -21,12 +21,12 @@ public class GunRecoilController : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.StartListening(EventData.Instance.onShoot, OnShoot);
+        EventManager.StartListening(EventData.Instance.onShoot, OnShootEvent);
     }
 
     private void OnDisable()
     {
-        EventManager.StopListening(EventData.Instance.onShoot, OnShoot);
+        EventManager.StopListening(EventData.Instance.onShoot, OnShootEvent);
     }
 
     private void InitGunRecoilSequence()
@@ -58,7 +58,7 @@ public class GunRecoilController : MonoBehaviour
         _gunRecoilSequence.Pause();
     }
 
-    private void OnShoot(Dictionary<string, object> message)
+    private void OnShootEvent(Dictionary<string, object> message)
     {
         _gunRecoilSequence.Restart();
     }
