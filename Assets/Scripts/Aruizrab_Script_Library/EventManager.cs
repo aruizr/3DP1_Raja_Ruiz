@@ -5,13 +5,14 @@ public class EventManager : SingletonMonoBehaviour<EventManager>
 {
     private Dictionary<string, Action<Dictionary<string, object>>> _events;
 
-    private void OnEnable()
+    private void Awake()
     {
-        _events ??= new Dictionary<string, Action<Dictionary<string, object>>>();
+        _events = new Dictionary<string, Action<Dictionary<string, object>>>();
     }
 
     public static void StartListening(string eventName, Action<Dictionary<string, object>> listener)
     {
+        if (!Instance) return;
         if (Instance._events.TryGetValue(eventName, out var @event))
         {
             @event += listener;
@@ -24,6 +25,7 @@ public class EventManager : SingletonMonoBehaviour<EventManager>
 
     public static void StopListening(string eventName, Action<Dictionary<string, object>> listener)
     {
+        if (!Instance) return;
         if (!Instance._events.TryGetValue(eventName, out var @event)) return;
         @event -= listener;
         Instance._events[eventName] = @event;
@@ -31,6 +33,7 @@ public class EventManager : SingletonMonoBehaviour<EventManager>
 
     public static void TriggerEvent(string eventName, Dictionary<string, object> message)
     {
+        if (!Instance) return;
         if (!Instance._events.TryGetValue(eventName, out var @event)) return;
         @event?.Invoke(message);
     }

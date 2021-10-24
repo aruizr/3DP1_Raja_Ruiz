@@ -33,18 +33,34 @@ public class StateMachine<T> where T : Enum
         set
         {
             if (_isLocked) return;
-            if (_currentState.Equals(value)) return;
-            _actions[_currentState][StatePhase.Exit]?.Invoke();
+            if (_currentState != null)
+            {
+                if (_currentState.Equals(value)) return;
+                _actions[_currentState][StatePhase.Exit]?.Invoke();
+            }
+
             _currentState = value;
             _actions[_currentState][StatePhase.Enter]?.Invoke();
         }
     }
 
-    public void Lock() => _isLocked = true;
+    public void Lock()
+    {
+        _isLocked = true;
+    }
 
-    public void Unlock() => _isLocked = false;
+    public void Unlock()
+    {
+        _isLocked = false;
+    }
 
-    public void OnStatePhase(T state, StatePhase phase, UnityAction action) => _actions[state][phase] = action;
+    public void OnStatePhase(T state, StatePhase phase, UnityAction action)
+    {
+        _actions[state][phase] = action;
+    }
 
-    public void Update() => _actions[_currentState][StatePhase.Stay]?.Invoke();
+    public void Update()
+    {
+        _actions[_currentState][StatePhase.Stay]?.Invoke();
+    }
 }

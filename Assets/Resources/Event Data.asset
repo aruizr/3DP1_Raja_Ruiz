@@ -12,20 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7e9b8f0e7724c840ad61fef66ee2357, type: 3}
   m_Name: Event Data
   m_EditorClassIdentifier: 
-  onShoot: 1
-  onFailedToShoot: 2
-  onShootHit: 3
-  onReload: 4
-  onReloadStart: 5
-  onReloadFinish: 6
-  onGivePlayerAmmo: 7
-  onRestorePlayerHealth: 8
-  onRestorePlayerShield: 9
-  onUpdateAmmo: 10
-  onUpdatePlayerHealth: 11
-  onUpdateInteractionTarget: 12
-  onUpdatePlayerShield: 13
-  onPlayerDie: 14
-  onPlayerTakeDamage: 15
-  onItemDestroyed: 16
-  onChallengeStartedByPlayer: 17
+  onShoot: 0000
+  onFailedToShoot: 0001
+  onShootHit: 0002
+  onReload: 0003
+  onReloadStart: 0004
+  onReloadFinish: 0005
+  onGivePlayerAmmo: 0006
+  onRestorePlayerHealth: 0007
+  onRestorePlayerShield: 0008
+  onUpdateAmmo: 0009
+  onUpdatePlayerHealth: 0010
+  onUpdateInteractionTarget: 0011
+  onUpdatePlayerShield: 0012
+  onPlayerDie: 0013
+  onPlayerTakeDamage: 0014
+  onItemDestroyed: 0015
+  onChallengeStartedByPlayer: 0016

@@ -42,6 +42,8 @@ public class GunRecoilController : MonoBehaviour
                 () => gunTransform.localPosition,
                 value => gunTransform.localPosition = value,
                 _originalGunLocalPosition.x + recoilSettings.movement, recoilSettings.startDuration));
+        _gunRecoilSequence.Join(
+            Camera.main.DOShakePosition(0.2f, new Vector3(0.05f, 0.05f, 0), 20));
         _gunRecoilSequence.Append(
             DOTween.ToAxis(
                 () => gunTransform.localEulerAngles,

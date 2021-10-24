@@ -57,7 +57,7 @@ public class PlayerHealthSystem : HealthSystem
 
     protected override void OnUpdateHealth()
     {
-        var healthPercent = CurrentHealth / health;
+        var healthPercent = CurrentHealth / MaxHealth;
         EventManager.TriggerEvent(EventData.instance.onUpdatePlayerHealth, new Dictionary<string, object>
         {
             {"health", healthPercent}
@@ -75,7 +75,7 @@ public class PlayerHealthSystem : HealthSystem
 
     private void OnRestoreHealth(Dictionary<string, object> message)
     {
-        CurrentHealth = health;
+        CurrentHealth = MaxHealth;
     }
 
     private void OnRestoreShield(Dictionary<string, object> message)

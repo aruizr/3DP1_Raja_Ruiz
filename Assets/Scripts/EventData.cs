@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Event Data", menuName = "Resources/Event Data")]
+[CreateAssetMenu(fileName = "Event Data", menuName = "Scriptable Objects/Event Data")]
 [FilePath("Resources/Event Data", FilePathAttribute.Location.ProjectFolder)]
 public class EventData : ScriptableSingleton<EventData>
 {
@@ -24,7 +24,7 @@ public class EventData : ScriptableSingleton<EventData>
 
     public string onPlayerDie;
     public string onPlayerTakeDamage;
-    
+
     public string onItemDestroyed;
 
     public string onChallengeStartedByPlayer;

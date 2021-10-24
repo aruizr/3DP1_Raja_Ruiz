@@ -1,24 +1,26 @@
 using UnityEngine;
 
-public abstract class HealthSystem : MonoBehaviour, IDamageTaker
+public abstract class HealthSystem : ExtendedMonoBehaviour, IDamageTaker
 {
     [SerializeField] protected float health;
 
     private float _currentHealth;
 
-    protected float CurrentHealth
+    public float CurrentHealth
     {
         get => _currentHealth;
-        set
+        protected set
         {
             _currentHealth = value < 0 ? 0 : value;
             OnUpdateHealth();
         }
     }
 
+    public float MaxHealth => health;
+
     private void Awake()
     {
-        CurrentHealth = health;
+        CurrentHealth = MaxHealth;
         OnInit();
     }
 

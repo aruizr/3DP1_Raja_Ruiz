@@ -1,28 +1,32 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class DistanceDoor : MonoBehaviour
 {
-    Animator animator;
+    [SerializeField] private Transform doorTransform;
 
-    // Update is called once per frame
-    
-    void Start(){
-        animator = GetComponent<Animator>();
+    private float _originalPositionY, _finalPositionY;
+
+    private void Awake()
+    {
+        _originalPositionY = doorTransform.position.y;
+        _finalPositionY = _originalPositionY - 3;
     }
 
-    // void OnTriggerEnter(Collider other){
-    //     if(other.gameObject.tag == "Player"){
-    //         animator.Play("DoorAnimation");
-    //         Debug.Log("EXECUTING");
-    //     }
-    // }
+    private void OnTriggerEnter(Collider other){
+        if(other.gameObject.CompareTag("Player"))
+        {
+            doorTransform.DOMoveY(_finalPositionY, 0.5f);
+        }
+    }
 
-    // void OnTriggerExit(Collision collision){
-    //     if(collision.gameObject.tag == "Player"){
-    //         animator.Play("DoorAnimation_close");
-    //     }
-    // }
+    private void OnTriggerExit(Collider other){
+        if(other.gameObject.CompareTag("Player")){
+            doorTransform.DOMoveY(_originalPositionY, 0.5f);
+        }
+    }
 
 }

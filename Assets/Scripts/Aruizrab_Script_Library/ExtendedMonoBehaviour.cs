@@ -17,6 +17,7 @@ public class ExtendedMonoBehaviour : MonoBehaviour
         private bool _cancelOnDisable;
         private IEnumerator _currentCoroutine;
         private float _interval;
+        private Func<bool> _cancelCondition;
 
         private void OnDisable()
         {
@@ -40,6 +41,7 @@ public class ExtendedMonoBehaviour : MonoBehaviour
         private IEnumerator RunAfterSeconds(float seconds)
         {
             yield return new WaitForSeconds(seconds);
+            if (_cancelCondition?.Invoke() ?? false) Cancel();
             _action?.Invoke();
             Destroy(this);
         }
@@ -56,6 +58,7 @@ public class ExtendedMonoBehaviour : MonoBehaviour
             for (var i = 0; i < times; i++)
             {
                 yield return new WaitForSeconds(_interval);
+                if (_cancelCondition?.Invoke() ?? false) Cancel();
                 _action?.Invoke();
             }
 
@@ -80,6 +83,7 @@ public class ExtendedMonoBehaviour : MonoBehaviour
             while (predicate.Invoke())
             {
                 yield return new WaitForSeconds(_interval);
+                if (_cancelCondition?.Invoke() ?? false) Cancel();
                 _action?.Invoke();
             }
 
@@ -102,12 +106,19 @@ public class ExtendedMonoBehaviour : MonoBehaviour
         private IEnumerator RunAfterEndOfFrame()
         {
             yield return new WaitForEndOfFrame();
+            if (_cancelCondition?.Invoke() ?? false) Cancel();
             _action?.Invoke();
         }
 
         public CoroutineBuilder CancelOnDisable(bool condition)
         {
             _cancelOnDisable = condition;
+            return this;
+        }
+
+        public CoroutineBuilder CancelIf([NotNull] Func<bool> predicate)
+        {
+            _cancelCondition = predicate;
             return this;
         }
     }
