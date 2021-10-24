@@ -33,6 +33,7 @@ public class ShootingGalleryController : MonoBehaviour
 
     void Start(){
         ResetAllTargets();
+        StartCoroutine("StartShootingChallange");
     }
 
     void MonitorDestroyer(Dictionary<string,object> args){
@@ -75,6 +76,9 @@ public class ShootingGalleryController : MonoBehaviour
         }
 
         yield return new WaitForSeconds(3f);
+        if(score>=100){
+            EventManager.TriggerEvent("challenge_exit", new Dictionary<string, object>(){});
+        }
         ResetAllTargets();
 
         running = false;

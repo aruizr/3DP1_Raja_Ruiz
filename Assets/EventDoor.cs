@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class EventDoor : Door
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+
+    [SerializeField]
+    string eventName;
+
+     void OnEnable(){
+        EventManager.StartListening(eventName, EventExecuted);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    void OnDisable(){
+        EventManager.StopListening(eventName, EventExecuted);
     }
+
+    
+    void EventExecuted(Dictionary<string,object> args){
+        OpenDoor();
+    }
+
 }
