@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Ammo Item
   m_EditorClassIdentifier: 
   itemName: Ammo
-  itemDescription: 
+  itemDescription: pick up
   ammoClip:
     rounds: 20

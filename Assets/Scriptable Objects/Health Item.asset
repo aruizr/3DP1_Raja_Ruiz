@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Health Item
   m_EditorClassIdentifier: 
   itemName: Health Kit
-  itemDescription: 
+  itemDescription: pick up

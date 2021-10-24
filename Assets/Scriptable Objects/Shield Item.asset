@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Shield Item
   m_EditorClassIdentifier: 
   itemName: Shield Kit
-  itemDescription: 
+  itemDescription: pick up

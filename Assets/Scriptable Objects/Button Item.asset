@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3992c8673a8dae1498368605b3e8a5eb, type: 3}
   m_Name: Button Item
   m_EditorClassIdentifier: 
-  itemName: 
-  itemDescription: 
+  itemName: Button
+  itemDescription: press
