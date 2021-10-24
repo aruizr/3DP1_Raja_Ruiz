@@ -38,6 +38,7 @@ public class DecalController : ExtendedMonoBehaviour
         var decal = _decalPool.Get();
         decal.transform.position = hit.point;
         decal.transform.rotation = Quaternion.LookRotation(hit.normal);
+        decal.transform.parent = hit.transform;
         _decalPool.Return(decal);
     }
 }

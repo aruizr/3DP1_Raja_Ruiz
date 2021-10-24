@@ -140,7 +140,7 @@ public class DroneAI : HealthSystem
 
     protected override void OnTakeDamage()
     {
-        transform.DOShakeRotation(onDroneHitStunnedSeconds, Vector3.one);
+        transform.DOShakeRotation(onDroneHitStunnedSeconds, Vector3.one * 2f);
         if (currentState != DroneState.Hit) ChangeState(DroneState.Hit);
     }
 

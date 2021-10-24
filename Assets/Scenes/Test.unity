@@ -2837,7 +2837,8 @@ PrefabInstance:
       propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6130724138074368770, guid: 2f6c78492da59d149a4437845f1dc6fa, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2f6c78492da59d149a4437845f1dc6fa, type: 3}
 --- !u!1001 &6776513008190167002
 PrefabInstance:
@@ -2951,6 +2952,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6833424157186353135, guid: 72e9ffad741cbc84480463b5161c359c, type: 3}
+      propertyPath: onDroneHitStunnedSeconds
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72e9ffad741cbc84480463b5161c359c, type: 3}
 --- !u!1001 &6860538646043603868
@@ -2960,6 +2965,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6860538645091282974, guid: 0ebaf7de73e132c4aa2061751a4d2b15, type: 3}
+      propertyPath: enemiesLayer.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
     - target: {fileID: 6860538645597110642, guid: 0ebaf7de73e132c4aa2061751a4d2b15, type: 3}
       propertyPath: m_RootOrder
       value: 3
