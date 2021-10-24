@@ -68,14 +68,14 @@ public class ShootingGalleryController : MonoBehaviour
         Debug.Log("Starting shooting gallery...");
         foreach (GameObject target in targets){
             target.SetActive(true);
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(2.1f);
             if(!target.GetComponent<ExplodableMonitor>().broken){
                 target.SetActive(false);
             }
             
         }
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
         if(score>=100){
             EventManager.TriggerEvent("challenge_exit", new Dictionary<string, object>(){});
         }
