@@ -10,10 +10,13 @@ public class DistanceDoor : MonoBehaviour
 
     private float _originalPositionY, _finalPositionY;
 
+    [SerializeField]
+    private float _offsetY;
+
     private void Awake()
     {
         _originalPositionY = doorTransform.position.y;
-        _finalPositionY = _originalPositionY - 3;
+        _finalPositionY = _originalPositionY - _offsetY;
     }
 
     private void OnTriggerEnter(Collider other){
