@@ -18,13 +18,13 @@ public class GunPositionController : ExtendedMonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.StartListening(EventData.Instance.onReloadStart, OnReload);
+        EventManager.StartListening(EventData.Instance.onReloadStart, OnReloadEvent);
         EventManager.StartListening(EventData.Instance.onReloadFinish, OnReloadFinish);
     }
 
     private void OnDisable()
     {
-        EventManager.StopListening(EventData.Instance.onReloadStart, OnReload);
+        EventManager.StopListening(EventData.Instance.onReloadStart, OnReloadEvent);
         EventManager.StopListening(EventData.Instance.onReloadFinish, OnReloadFinish);
     }
 
@@ -35,7 +35,7 @@ public class GunPositionController : ExtendedMonoBehaviour
         gunTransform.localEulerAngles = _originalGunLocalRotation;
     }
 
-    private void OnReload(Dictionary<string, object> message)
+    private void OnReloadEvent(Dictionary<string, object> message)
     {
         gunTransform.parent = handTransform;
     }

@@ -5,7 +5,6 @@ using UnityEngine.UI;
 public class EnemyHealthDisplay : MonoBehaviour
 {
     [SerializeField] private Slider slider;
-    [SerializeField] private float sliderSmoothing = 0.25f;
 
     private HealthSystem _currentDisplayTarget;
     private float _currentVelocity;

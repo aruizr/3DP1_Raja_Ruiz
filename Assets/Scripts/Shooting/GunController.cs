@@ -6,9 +6,10 @@ public class GunController : ExtendedMonoBehaviour
 {
     [SerializeField] private GunData gunData;
     [SerializeField] private LayerMask layerMask;
+    [SerializeField] private Transform fireSource;
 
     private Gun _gun;
-    private bool _isShooting;
+    private bool _isShooting, _isReloading;
 
     private void Awake()
     {
@@ -23,11 +24,18 @@ public class GunController : ExtendedMonoBehaviour
     private void OnEnable()
     {
         EventManager.StartListening(EventData.Instance.onGivePlayerAmmo, OnAddAmmo);
+        EventManager.StartListening(EventData.Instance.onReloadFinish, OnReloadFinish);
     }
 
     private void OnDisable()
     {
         EventManager.StopListening(EventData.Instance.onGivePlayerAmmo, OnAddAmmo);
+        EventManager.StopListening(EventData.Instance.onReloadFinish, OnReloadFinish);
+    }
+
+    private void OnReloadFinish(Dictionary<string, object> obj)
+    {
+        _isReloading = false;
     }
 
     private void OnAddAmmo(Dictionary<string, object> message)
@@ -39,13 +47,18 @@ public class GunController : ExtendedMonoBehaviour
 
     public void OnReload()
     {
+        if (_isReloading) return;
+        if (_isShooting) return;
         if (!_gun.Reload()) return;
+        _isReloading = true;
+        _isShooting = false;
         NotifyAmmoUpdate();
         NotifyGunReloaded();
     }
 
     public void OnShoot(InputValue inputValue)
     {
+        if (_isReloading) return;
         _isShooting = inputValue.isPressed;
         if (!_isShooting) return;
         if (_gun.FireRate == 0)
@@ -100,7 +113,10 @@ public class GunController : ExtendedMonoBehaviour
 
     private void NotifyGunShot()
     {
-        EventManager.TriggerEvent(EventData.Instance.onShoot, null);
+        EventManager.TriggerEvent(EventData.Instance.onShoot, new Dictionary<string, object>()
+        {
+            {"source", fireSource}
+        });
     }
 
     private void NotifyGunFailedToShoot()

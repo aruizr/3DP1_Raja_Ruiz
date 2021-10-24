@@ -35,10 +35,11 @@ public class DecalController : ExtendedMonoBehaviour
     private void OnShootHit(Dictionary<string, object> message)
     {
         var hit = (RaycastHit) message["hit"];
+        if (hit.transform.GetComponent<IDamageTaker>() != null) return;
         var decal = _decalPool.Get();
+        decal.transform.parent = hit.transform;
         decal.transform.position = hit.point;
         decal.transform.rotation = Quaternion.LookRotation(hit.normal);
-        decal.transform.parent = hit.transform;
         _decalPool.Return(decal);
     }
 }
