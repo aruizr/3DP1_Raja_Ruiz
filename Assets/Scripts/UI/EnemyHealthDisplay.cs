@@ -17,9 +17,12 @@ public class EnemyHealthDisplay : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!_currentDisplayTarget) return;
-        var health = _currentDisplayTarget.CurrentHealth / _currentDisplayTarget.MaxHealth;
-        slider.value = Mathf.SmoothDamp(slider.value, health, ref _currentVelocity, sliderSmoothing);
+        if (!_currentDisplayTarget)
+        {
+            slider.gameObject.SetActive(false);
+            return;
+        }
+        slider.value = _currentDisplayTarget.CurrentHealth / _currentDisplayTarget.MaxHealth;
     }
 
     private void OnEnable()

@@ -22,7 +22,7 @@ public class InteractionDisplay : MonoBehaviour
         var interactiveItem = target?.GetComponent<IInteractiveItem>();
 
         interactionText.text = interactiveItem != null
-            ? "Press <style=\"C1\">E</style> to pick up " + interactiveItem.GetName()
+            ? $"Press <style=\"C1\">E</style> to {interactiveItem.GetDescription()} {interactiveItem.GetName()}"
             : null;
     }
 }

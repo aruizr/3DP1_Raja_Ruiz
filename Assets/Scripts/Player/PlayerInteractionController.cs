@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerInteractionController : MonoBehaviour
 {
     [SerializeField] private float range;
+    [SerializeField] private LayerMask enemiesLayer;
 
     private GameObject _currentInteractionTarget;
 
@@ -22,7 +23,14 @@ public class PlayerInteractionController : MonoBehaviour
     private void Update()
     {
         var ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-        CurrentInteractionTarget = Physics.Raycast(ray, out var hit, range) ? hit.collider.gameObject : null;
+
+        CurrentInteractionTarget = true switch
+        {
+            true when Physics.Raycast(ray, out var enemyHit, 100, enemiesLayer) => enemyHit.collider
+                .gameObject,
+            true when Physics.Raycast(ray, out var itemHit, range) => itemHit.collider.gameObject,
+            _ => null
+        };
     }
 
     private void NotifyInteractionTarget()
