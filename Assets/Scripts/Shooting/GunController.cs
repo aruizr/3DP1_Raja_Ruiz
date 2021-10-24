@@ -22,12 +22,12 @@ public class GunController : ExtendedMonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.StartListening(EventData.instance.onGivePlayerAmmo, OnAddAmmo);
+        EventManager.StartListening(EventData.Instance.onGivePlayerAmmo, OnAddAmmo);
     }
 
     private void OnDisable()
     {
-        EventManager.StopListening(EventData.instance.onGivePlayerAmmo, OnAddAmmo);
+        EventManager.StopListening(EventData.Instance.onGivePlayerAmmo, OnAddAmmo);
     }
 
     private void OnAddAmmo(Dictionary<string, object> message)
@@ -86,7 +86,7 @@ public class GunController : ExtendedMonoBehaviour
         var magazineRounds = _gun.GetMagazineRounds();
         var clipsRounds = _gun.GetClipsRounds();
 
-        EventManager.TriggerEvent(EventData.instance.onUpdateAmmo, new Dictionary<string, object>
+        EventManager.TriggerEvent(EventData.Instance.onUpdateAmmo, new Dictionary<string, object>
         {
             {"magazineRounds", magazineRounds},
             {"clipsRounds", clipsRounds}
@@ -95,22 +95,22 @@ public class GunController : ExtendedMonoBehaviour
 
     private void NotifyGunReloaded()
     {
-        EventManager.TriggerEvent(EventData.instance.onReload, null);
+        EventManager.TriggerEvent(EventData.Instance.onReload, null);
     }
 
     private void NotifyGunShot()
     {
-        EventManager.TriggerEvent(EventData.instance.onShoot, null);
+        EventManager.TriggerEvent(EventData.Instance.onShoot, null);
     }
 
     private void NotifyGunFailedToShoot()
     {
-        EventManager.TriggerEvent(EventData.instance.onFailedToShoot, null);
+        EventManager.TriggerEvent(EventData.Instance.onFailedToShoot, null);
     }
 
     private void NotifyGunShotHit(RaycastHit hit)
     {
-        EventManager.TriggerEvent(EventData.instance.onShootHit, new Dictionary<string, object>
+        EventManager.TriggerEvent(EventData.Instance.onShootHit, new Dictionary<string, object>
         {
             {"hit", hit}
         });

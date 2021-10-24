@@ -13,7 +13,7 @@ public class DecalController : ExtendedMonoBehaviour
         _decalPool = new QueuePool<GameObject>(
             () =>
             {
-                var decal = Instantiate(bulletDecalPrefab, transform);
+                var decal = Instantiate(bulletDecalPrefab);
                 decal.SetActive(false);
                 return decal;
             },
@@ -24,12 +24,12 @@ public class DecalController : ExtendedMonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.StartListening(EventData.instance.onShootHit, OnShootHit);
+        EventManager.StartListening(EventData.Instance.onShootHit, OnShootHit);
     }
 
     private void OnDisable()
     {
-        EventManager.StopListening(EventData.instance.onShootHit, OnShootHit);
+        EventManager.StopListening(EventData.Instance.onShootHit, OnShootHit);
     }
 
     private void OnShootHit(Dictionary<string, object> message)

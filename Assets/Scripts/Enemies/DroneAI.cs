@@ -168,7 +168,7 @@ public class DroneAI : HealthSystem
         if (!Physics.Raycast(fireSource.position, fireSource.forward, out var hit, Mathf.Infinity,
             shootingLayerMasks)) return;
         hit.collider.gameObject.GetComponent<IDamageTaker>()?.TakeDamage(shootingDamage);
-        EventManager.TriggerEvent(EventData.instance.onShootHit, new Dictionary<string, object>
+        EventManager.TriggerEvent(EventData.Instance.onShootHit, new Dictionary<string, object>
         {
             {"hit", hit}
         });

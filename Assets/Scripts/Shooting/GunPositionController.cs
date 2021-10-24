@@ -18,14 +18,14 @@ public class GunPositionController : ExtendedMonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.StartListening(EventData.instance.onReloadStart, OnReload);
-        EventManager.StartListening(EventData.instance.onReloadFinish, OnReloadFinish);
+        EventManager.StartListening(EventData.Instance.onReloadStart, OnReload);
+        EventManager.StartListening(EventData.Instance.onReloadFinish, OnReloadFinish);
     }
 
     private void OnDisable()
     {
-        EventManager.StopListening(EventData.instance.onReloadStart, OnReload);
-        EventManager.StopListening(EventData.instance.onReloadFinish, OnReloadFinish);
+        EventManager.StopListening(EventData.Instance.onReloadStart, OnReload);
+        EventManager.StopListening(EventData.Instance.onReloadFinish, OnReloadFinish);
     }
 
     private void OnReloadFinish(Dictionary<string, object> message)

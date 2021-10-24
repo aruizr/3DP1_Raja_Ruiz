@@ -13,7 +13,7 @@ public class BulletImpactFXController : MonoBehaviour
         _impactFXPool = new QueuePool<GameObject>(
             () =>
             {
-                var impactFX = Instantiate(impactFXPrefab, transform);
+                var impactFX = Instantiate(impactFXPrefab);
                 impactFX.GetComponent<ParticleSystem>().Stop();
                 return impactFX;
             },
@@ -29,12 +29,12 @@ public class BulletImpactFXController : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.StartListening(EventData.instance.onShootHit, OnShootHit);
+        EventManager.StartListening(EventData.Instance.onShootHit, OnShootHit);
     }
 
     private void OnDisable()
     {
-        EventManager.StopListening(EventData.instance.onShootHit, OnShootHit);
+        EventManager.StopListening(EventData.Instance.onShootHit, OnShootHit);
     }
 
     private void OnShootHit(Dictionary<string, object> message)

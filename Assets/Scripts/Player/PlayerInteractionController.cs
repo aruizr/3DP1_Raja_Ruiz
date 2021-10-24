@@ -27,7 +27,7 @@ public class PlayerInteractionController : MonoBehaviour
 
     private void NotifyInteractionTarget()
     {
-        EventManager.TriggerEvent(EventData.instance.onUpdateInteractionTarget, new Dictionary<string, object>
+        EventManager.TriggerEvent(EventData.Instance.onUpdateInteractionTarget, new Dictionary<string, object>
         {
             {"target", CurrentInteractionTarget}
         });

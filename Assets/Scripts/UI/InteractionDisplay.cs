@@ -8,12 +8,12 @@ public class InteractionDisplay : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.StartListening(EventData.instance.onUpdateInteractionTarget, OnDisplayInteractionInfo);
+        EventManager.StartListening(EventData.Instance.onUpdateInteractionTarget, OnDisplayInteractionInfo);
     }
 
     private void OnDisable()
     {
-        EventManager.StopListening(EventData.instance.onUpdateInteractionTarget, OnDisplayInteractionInfo);
+        EventManager.StopListening(EventData.Instance.onUpdateInteractionTarget, OnDisplayInteractionInfo);
     }
 
     private void OnDisplayInteractionInfo(Dictionary<string, object> message)

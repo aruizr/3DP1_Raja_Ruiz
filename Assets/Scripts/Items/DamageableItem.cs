@@ -6,7 +6,7 @@ public class DamageableItem : HealthSystem
 {
     protected override void OnDie()
     {
-        EventManager.TriggerEvent(EventData.instance.onItemDestroyed, new Dictionary<string, object>()
+        EventManager.TriggerEvent(EventData.Instance.onItemDestroyed, new Dictionary<string, object>()
         {
             {"item", gameObject}
         });
