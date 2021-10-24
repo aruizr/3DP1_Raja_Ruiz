@@ -33,7 +33,7 @@ public class ShootingGalleryController : MonoBehaviour
 
     void Start(){
         ResetAllTargets();
-        StartCoroutine("StartShootingChallange");
+        //StartCoroutine("StartShootingChallange");
     }
 
     void MonitorDestroyer(Dictionary<string,object> args){
